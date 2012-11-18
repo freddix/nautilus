@@ -2,12 +2,12 @@
 
 Summary:	Nautilus is a file manager for the GNOME desktop environment
 Name:		nautilus
-Version:	3.6.2
+Version:	3.6.3
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/nautilus/3.6/%{name}-%{version}.tar.xz
-# Source0-md5:	1fa690cdb93c1980a221907a95190d19
+# Source0-md5:	a0ef8ce24933aa897568aef98645d4e8
 URL:		http://nautilus.eazel.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -134,7 +134,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/extensions-3.0/libnautilus-sendto.so
 %attr(755,root,root) %{_libexecdir}/nautilus-convert-metadata
 
-%{_datadir}/GConf/gsettings/nautilus.convert
 %{_datadir}/dbus-1/services/org.freedesktop.FileManager1.service
 %{_datadir}/dbus-1/services/org.gnome.Nautilus.service
 %{_datadir}/glib-2.0/schemas/*.gschema.xml
