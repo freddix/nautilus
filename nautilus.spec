@@ -2,12 +2,12 @@
 
 Summary:	Nautilus is a file manager for the GNOME desktop environment
 Name:		nautilus
-Version:	3.10.0
+Version:	3.10.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/nautilus/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	7260e6743df36f358aa468bb20f2b8e5
+# Source0-md5:	91a3a9364489a9e98ab9730beb199d1c
 URL:		https://wiki.gnome.org/Nautilus
 BuildRequires:	autoconf
 BuildRequires:	automake
