@@ -2,20 +2,20 @@
 
 Summary:	Nautilus is a file manager for the GNOME desktop environment
 Name:		nautilus
-Version:	3.10.1
+Version:	3.12.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/nautilus/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	91a3a9364489a9e98ab9730beb199d1c
+Source0:	http://ftp.gnome.org/pub/gnome/sources/nautilus/3.12/%{name}-%{version}.tar.xz
+# Source0-md5:	6a8c0916c8c44f37fbb6d9279cdafbe2
 URL:		https://wiki.gnome.org/Nautilus
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	exempi-devel
 BuildRequires:	freetype-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-desktop-devel >= 3.10.0
-BuildRequires:	gobject-introspection-devel >= 1.38.0
+BuildRequires:	gnome-desktop-devel >= 3.12.0
+BuildRequires:	gobject-introspection-devel >= 1.40.0
 BuildRequires:	intltool
 BuildRequires:	libexif-devel
 BuildRequires:	librsvg-devel
@@ -29,7 +29,7 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib-gio-gsettings
 Requires(post,postun):	shared-mime-info
 Requires:	gdk-pixbuf-rsvg
-Requires:	gvfs >= 1.18.1
+Requires:	gvfs >= 1.20.0
 Requires:	xdg-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -97,12 +97,13 @@ Search result provider for GNOME Shell.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-3.0
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -r $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,en@shaw,crh,ha,ig,io,ps}
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,en@shaw,crh,ha,ig,io,ps}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-3.0/*.la
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/GConf
 
 %find_lang %{name} --with-gnome --all-name
 
