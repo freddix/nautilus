@@ -2,20 +2,20 @@
 
 Summary:	Nautilus is a file manager for the GNOME desktop environment
 Name:		nautilus
-Version:	3.12.0
-Release:	1
+Version:	3.14.0
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/nautilus/3.12/%{name}-%{version}.tar.xz
-# Source0-md5:	6a8c0916c8c44f37fbb6d9279cdafbe2
+Source0:	http://ftp.gnome.org/pub/gnome/sources/nautilus/3.14/%{name}-%{version}.tar.xz
+# Source0-md5:	fd951916829c91351a539573bbabab4d
 URL:		https://wiki.gnome.org/Nautilus
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	exempi-devel
 BuildRequires:	freetype-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-desktop-devel >= 3.12.0
-BuildRequires:	gobject-introspection-devel >= 1.40.0
+BuildRequires:	gnome-desktop-devel >= 3.14.0
+BuildRequires:	gobject-introspection-devel >= 1.42.0
 BuildRequires:	intltool
 BuildRequires:	libexif-devel
 BuildRequires:	librsvg-devel
@@ -29,7 +29,7 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib-gio-gsettings
 Requires(post,postun):	shared-mime-info
 Requires:	gdk-pixbuf-rsvg
-Requires:	gvfs >= 1.20.0
+Requires:	gvfs-fuse >= 1.22.0
 Requires:	xdg-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -88,9 +88,10 @@ Search result provider for GNOME Shell.
 %{__autoconf}
 %{__automake}
 %configure \
-	--disable-silent-rules	\
-	--disable-static	\
-	--disable-update-mimedb	\
+	--disable-schemas-compile   \
+	--disable-silent-rules	    \
+	--disable-static	    \
+	--disable-update-mimedb	    \
 	%{!?with_tracker:--enable-tracker=no} \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
@@ -101,8 +102,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,en@shaw,crh,ha,ig,io,ps}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-3.0/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/GConf
 
 %find_lang %{name} --with-gnome --all-name
@@ -139,7 +140,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.gnome.Nautilus.service
 %{_datadir}/glib-2.0/schemas/*.gschema.xml
 %{_datadir}/mime/packages/*.xml
-%{_datadir}/nautilus
 
 %{_desktopdir}/*.desktop
 
@@ -157,7 +157,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libnautilus-extension.so
-%{_libdir}/libnautilus-extension.la
 %{_includedir}/%{name}
 %{_pkgconfigdir}/libnautilus-extension.pc
 %{_datadir}/gir-1.0/Nautilus-3.0.gir
@@ -168,6 +167,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files shell-search-provider
 %defattr(644,root,root,755)
-%{_datadir}/dbus-1/services/org.gnome.Nautilus.SearchProvider.service
 %{_datadir}/gnome-shell/search-providers/nautilus-search-provider.ini
 
